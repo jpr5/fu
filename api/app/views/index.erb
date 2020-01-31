@@ -1,0 +1,17 @@
+<h1> Experiments (iter=<%= @i %>) <% if flash[:notice] %>notice: <%= flash[:notice] %><% end %></H1>
+
+<% if params.keys.size %>
+    Params:
+    <ul>
+        <% params.each do |foo, bar| %>
+            <li><%= foo %>: <%= bar %></li>
+        <% end %>
+    </ul>
+<% end %>
+
+<% if logged_in? %>
+    <h3>Authenticated user: <%= h fu_user.first_name + " " + fu_user.last_name %></h3>
+<% end %>
+
+<a href="/login">Login</a>
+<a href="/logout">Logout</a>

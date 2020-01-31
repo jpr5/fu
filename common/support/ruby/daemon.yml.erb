@@ -1,0 +1,15 @@
+default:
+    name: <%= APP_NAME.downcase %>
+    version: DEV
+    interval: 60
+    logging:
+        console: true
+        formatters:
+            - color
+            #- location
+
+     # configure scheduled methods here
+
+production:
+    logging:
+        formatters:

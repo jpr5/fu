@@ -1,0 +1,9 @@
+default:
+    name: sail
+    version: DEV
+    port: 4269
+    require_ssl: false
+    logging:
+        formatters:
+          - color
+          - location

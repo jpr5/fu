@@ -1,0 +1,8 @@
+app:
+    name: example
+    version: DEV
+    workers: 3
+
+    # Each Scheduled method needs to show up here, otherwise it won't be enabled.
+    # Anything can be passed in as config: scalar, array, hash; it's passed straight to scheduled method.
+    do_something: 3

@@ -1,0 +1,22 @@
+##
+## CloudCrowd Application Rakefile
+##
+
+ROOT = File.dirname(__FILE__)
+$:.unshift ROOT + '/lib'
+
+# Load the goods.
+load 'tasks/_fu.rake'
+
+##
+## Custom (local) rake tasks follow.  General (common) tasks belong in
+## common:lib/tasks/cloud_crowd.rake.
+##
+
+# This allows rake setup:models/setup:db:models to be run from MCP.
+namespace :setup do
+    task :env do
+        $DB.setup(FUROOT)
+    end
+end
+o

@@ -1,0 +1,13 @@
+default:
+    common:
+        access_key_id: aki
+        secret_access_key: sak
+
+    ses:
+        region: us-east-1 # n. virginia
+        name: ses-smtp-user.20191028-133622
+        username: username
+        password: password
+
+    s3:
+        region: us-west-2  # oregon

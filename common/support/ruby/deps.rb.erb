@@ -1,0 +1,29 @@
+##
+## Standard FU Dependencies
+##
+
+## System
+
+<%= SYSTEM_DEPS.join('') %>
+
+## FU
+
+<%= FU_DEPS.join('') %>
+#require 'fu/scheduler' # Uncomment to enable $SCHEDULER
+#require 'fu/aws'       # Uncomment to enable AWS library
+
+## App-Local
+
+<%= LOCAL_DEPS.join('') %>
+
+##
+## Setup
+##
+
+<% if defined?(BOOTUP_DEPS) and BOOTUP_DEPS %>
+$DB.setup if $DB
+$AWS.configure if $AWS
+<% else %>
+# For Sinatra, put setup routines in ::Server#configure (app/server.rb).
+# For Daemons, put setup routines in ::<%= APP_NAME.capitalize %>#before(:init) hook.
+<% end %>

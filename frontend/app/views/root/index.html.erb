@@ -1,0 +1,12 @@
+<h1>Placeholder root#index page (until main site is integrated)</h1>
+
+<ul>
+    <li><%= link_to "dev#index (experiments)", dev_path %></li>
+        <!-- add more experiments here if you want -->
+</ul>
+
+<p>
+
+<% if logged_in? %>
+<h3>Authenticated: <%= fu_user.first_name + " " + fu_user.last_name %></h3>
+<% end %>

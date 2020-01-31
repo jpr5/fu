@@ -1,0 +1,14 @@
+app:
+    name: <%= APP_NAME %>
+    version: "1.0.0"
+    domain: .staginganddesignnetwork.com    # needs to change once integrated into PHP URL hierarchy
+    unicorn:
+        workers: 5 # Start easy/small, raise as necsesary
+        root: /srv/src/apps/<%= APP_NAME %>
+    sock: /srv/socks/<%= APP_NAME %>.sock
+    pid_file: /srv/socks/<%= APP_NAME %>.pid
+    google_analytics_account: "UA-10989305-2"
+    logging:
+        console: false
+        level: debug
+        syslog: LOG_LOCAL1

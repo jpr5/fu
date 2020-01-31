@@ -1,0 +1,9 @@
+app:
+    logging: true
+    repositories:
+        default:
+            adapter: mysql
+            host: db-staging.int.yourmom.com
+            database: fu
+            username: fuweb
+            password: ""

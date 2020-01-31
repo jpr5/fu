@@ -1,0 +1,14 @@
+app:
+    name: "frontend"
+    version: "1.0.0"
+    domain: .staging.yourmom.com
+    mount_on: /frontend
+    unicorn:
+        workers: 5 # Start easy/small, raise as necsesary
+        root: /srv/src/apps/frontend
+    sock: "/srv/socks/frontend.sock"
+    pid_file: "/srv/socks/frontend.pid"
+    logging:
+        console: false
+        level: debug
+        syslog: LOG_LOCAL1

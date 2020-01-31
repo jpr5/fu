@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+daemon_path = File.expand_path("#{File.dirname(__FILE__)}/..")
+daemon_name = File.basename(daemon_path)
+
+$:.unshift File.expand_path(daemon_path + "/lib")
+$:.unshift "."
+
+require 'boot/init'
+require 'fu/mcp/daemon'
+
+daemon = ::MCP::Daemon.instantiate(daemon_name, daemon_path)
+
+##
+## Check config and run.
+##
+
+# Bail if the configuration was fucked.
+if daemon.valid_config? == false
+    $LOG.fatal "#{daemon_name} has invalid configuration"
+    exit -1
+end
+
+daemon.run

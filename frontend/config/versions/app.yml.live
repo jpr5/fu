@@ -1,0 +1,15 @@
+app:
+    name: "frontend"
+    version: "1.0.0"
+    domain: .staginganddesignnetwork.com    # needs to change once integrated into PHP URL hierarchy
+    mount_on: /frontend
+    unicorn:
+        workers: 5 # Start easy/small, raise as necsesary
+        root: /srv/src/apps/frontend
+    sock: "/srv/socks/frontend.sock"
+    pid_file: "/srv/socks/frontend.pid"
+    google_analytics_account: "UA-10989305-2"
+    logging:
+        console: false
+        level: debug
+        syslog: LOG_LOCAL1

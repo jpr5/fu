@@ -1,0 +1,13 @@
+app:
+    name: <%= APP_NAME %>
+    version: "1.0.0"
+    domain: .staging.yourmom.com
+    unicorn:
+        workers: 5 # Start easy/small, raise as necsesary
+        root: /srv/src/apps/<%= APP_NAME %>
+    sock: /srv/socks/<%= APP_NAME %>.sock
+    pid_file: /srv/socks/<%= APP_NAME %>.pid
+    logging:
+        console: false
+        level: debug
+        syslog: LOG_LOCAL1

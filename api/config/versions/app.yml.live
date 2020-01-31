@@ -1,0 +1,13 @@
+app:
+    name: sail
+    version: "1.0.0"
+    domain: .staginganddesignnetwork.com    # needs to change once integrated into PHP URL hierarchy
+    unicorn:
+        workers: 5 # Start easy/small, raise as necsesary
+        root: /srv/src/apps/sail
+    sock: /srv/socks/sail.sock
+    pid_file: /srv/socks/sail.pid
+    logging:
+        console: false
+        level: debug
+        syslog: LOG_LOCAL1

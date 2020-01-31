@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+
+daemon_path = File.expand_path("#{File.dirname(__FILE__)}/..")
+daemon_name = File.basename(daemon_path)
+
+$:.unshift File.expand_path(daemon_path + "/lib")
+$:.unshift "."
+
+require 'boot/init'
+require 'fu/mcp/daemon'
+
+$DAEMON = daemon = ::MCP::Daemon.instantiate(daemon_name, daemon_path)
+
+##
+## Ignore config check and drop user into IRB shell.
+##
+
+require 'irb'
+
+# Disable logging to syslog, enable to console
+$LOG.configure(:console => true, :syslog => nil) if $LOG
+
+# Disable any handlers while you're exploring shit.  NOTE: This generally seems like a
+# good safety idea, but it might get in people's way -- depends on what the common case
+# turns out to be.
+
+# ask the daemon to init for console mode
+daemon.prep_console_mode
+
+IRB.start(__FILE__)

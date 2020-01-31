@@ -1,0 +1,9 @@
+default:
+    name: frontend
+    version: DEV
+    port: 4269
+    domain: .local.yourmom.com
+    logging:
+        formatters:
+#          - color
+#          - location

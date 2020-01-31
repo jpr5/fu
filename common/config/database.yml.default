@@ -1,0 +1,18 @@
+default:
+    logging: false
+    repositories:
+        default:
+            adapter: mysql
+            host: 127.0.0.1
+            database: fu
+            username: fulocal
+            password: ""
+
+test:
+    logging: false
+    repositories:
+        default:
+            database: fu_test
+
+production:
+    logging: false

@@ -1,0 +1,22 @@
+<% if flash[:notice] %>
+    <div class="flash"><%= h flash[:notice] %></div>
+<% end %>
+
+<% if flash[:alert] %>
+    <div class="flash"><%= h flash[:alert] %></div>
+<% end %>
+
+<form action="/login" accept-charset="UTF-8" method="post">
+    <%= csrf_tag %>
+    <div class=”field”>
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email" />
+    </div>
+    <div class=”field”>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" />
+    </div>
+    <div class=”actions”>
+        <input type="submit" name="commit" value="Login" data-disable-with="Login" />
+    </div>
+</form>

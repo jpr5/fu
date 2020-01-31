@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+MAKE_SOME_SPACE = 'balls' + 'x' * 80
+
+# If we've got some space, pull the arg off and continue, otherwise re-exec
+# ourselves with the current arguments plus our really big one.
+if ARGV.first =~ /balls/
+    ARGV.shift
+else
+    exec(__FILE__, MAKE_SOME_SPACE, *ARGV)
+end
+
+$:.unshift File.expand_path(File.dirname(__FILE__) + "/../lib")
+$:.unshift "."
+
+require 'boot/init'
+require 'fu/mcp/launcher'
+
+::MCP::Launcher.new.start

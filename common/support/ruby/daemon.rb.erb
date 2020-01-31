@@ -1,0 +1,51 @@
+# Please look at apps.git:daemons/example/app/example.rb for detailed
+# documentation on how to use the MCP::Daemon class.
+
+class <%= APP_NAME.capitalize %> < ::MCP::Daemon
+    require_component :DB, :SCHEDULER
+
+    # declare_state :some_value  # Optional
+
+    configure do |key, value|
+        # Optional
+    end
+
+    cmdline_arguments do |opts|
+        # Optional
+    end
+
+    # Optional; if undefined, never called or used.
+    def valid_config?
+        return true
+    end
+
+    before :init do
+        $AWS.configure if $AWS
+        $SAIL.configure if $SAIL
+    end
+
+    after :spawn do
+        # Optional
+    end
+
+end
+
+
+class Schedule
+
+    # Write your scheduled procs here as methods.
+    #
+    # OR migrate this class into a separate file(s) and define as:
+    #
+    #    class <%= APP_NAME.capitalize %>::Schedule
+    #        ...
+    #    end
+
+    protected
+
+    # Write utility methods/helpers here
+
+    def configure(scheduler)
+        # Optional
+    end
+end

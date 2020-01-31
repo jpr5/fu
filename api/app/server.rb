@@ -1,0 +1,96 @@
+##
+## Primary class wrapping base server functionality.
+##
+
+class Server < ::Sinatra::Base
+
+    register ::FU::Sinatra::Stack
+
+    set :app_file,   File.expand_path(__FILE__)
+    set :root,       File.expand_path(File.dirname(__FILE__) / "..")
+    set :views,      root / 'app' / 'views'
+    set :public_dir, root / 'public'
+
+    configure do
+        disable :sessions
+
+        $DB.setup(root) if $DB
+        $AWS.configure if $AWS
+
+        not_found do
+            msg = "URL not recognized: %s" % env['REQUEST_URI']
+            $LOG.warn msg
+            stop :not_found, desc: msg
+        end
+
+        error do
+            e = env['sinatra.error']
+            $LOG.error(e) { "exception raised during processing" }
+        end
+    end
+
+    configure :development do
+        enable :reload_templates, :show_exceptions, :reloader
+
+        # Jumps to a debugger in the middle of any request.
+        before(/debug(|ger)/) { debugger }
+    end
+
+    configure :production do
+        disable :reload_templates, :reloader
+    end
+
+    configure :test do
+        disable :reload_templates, :reloader
+    end
+
+    ##
+    ## Filters
+    ##
+
+    before do
+        # Before every request, do something.
+        # Also takes a param: an url or regex.
+    end
+
+    helpers do
+        # Gives you fu_user helper et al.
+        include ::FU::Rails::Helpers::Session
+        include ::FU::Rails::Helpers::Formatting
+
+        # NOTE: Some comes from FU::Sinatra::Stack, too.
+    end
+
+
+    ###
+    ### Class methods
+    ###
+
+    def self.boot!
+        # Post-load, just before getting requests
+        $SCHEDULER.boot! if defined? $SCHEDULER
+    end
+
+    def self.route(verb, path, options={}, &block)
+        case path
+        when String then path += "/?" if path[-1] != ?/
+        when Regexp then path = Regexp.new(path.source + "/?") if path.source[-1] != ?/
+        end
+        super(verb, path, options, &block)
+    end
+
+    ## URL Loaders
+
+    # Source our URLs.  Call load but make it act like require -- ensures the
+    # urls are loaded everytime this class is reloaded, but a reloader like
+    # Rack::Reloader will rely on $LOADED_FEATURES to determine what files to
+    # stat.
+    Dir[ root / 'app/urls/*.rb' ].each do |file|
+        $LOG.debug "Loading #{file}"
+        load file
+        $LOADED_FEATURES << file unless $LOADED_FEATURES.include?(file)
+    end
+
+end
+
+$SERVER = ::Server

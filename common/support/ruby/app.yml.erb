@@ -1,0 +1,19 @@
+default:
+    name: <%= APP_NAME %>
+    version: DEV
+    port: 4269
+    domain: .local.yourmom.com
+    logging: 
+        console: true
+        formatters:
+            - color
+            #- location
+
+production:
+    unicorn:
+        workers: 2
+        root: .
+    #sock: /tmp/<%= APP_NAME %>.sock
+    logging:
+        formatters:
+ 
