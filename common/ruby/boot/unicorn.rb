@@ -78,6 +78,10 @@ Unicorn::Configurator::RACKUP[:set_listener] = false
 Unicorn::Configurator::RACKUP[:no_default_middleware] = true
 
 before_fork do |server, worker|
+    # Shut down any DB connections we may have started (verify table/model
+    # existence) so we don't bork shared file descriptors.
+    DataObjects::Pooling.pools.each(&:dispose) if defined? DataObjects
+
     # Handle pidfile, if one is set + we're not already in "oldbin" mode (master
     # dying off) + the pid file is still there.
     next unless server.pid
