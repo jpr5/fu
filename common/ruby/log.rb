@@ -207,7 +207,7 @@ module FU
                     #
                     # Facility and host
                     #     syslog: LOG_LOCAL6
-                    #     host: syslogger.int.cloudcrowd.com
+                    #     host: syslogger.int.foobar.com
 
                     facility = v
                     host = config[:host]

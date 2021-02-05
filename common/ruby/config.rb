@@ -1,5 +1,5 @@
 ##
-## (SDN) Application Configuration Loader
+## Application Configuration Loader
 ##
 
 require 'yaml'
