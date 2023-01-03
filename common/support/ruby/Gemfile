@@ -26,7 +26,7 @@ gem 'uglifier', '= 4.2.0'
 gem 'aws-sdk-s3', '= 1.53.0'
 gem 'aws-sdk-ses', '= 1.27.0'
 
-gem 'httparty', '= 0.17.1'
+gem 'httparty', '0.21.0'
 
 # DataMapper libraries
 gem 'eigenclass', '= 2.0.4'
